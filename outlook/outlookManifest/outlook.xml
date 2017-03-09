@@ -3,10 +3,13 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="MailApp">
   <Id>838db0e1-4155-428d-a788-dd55d704cc83</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>[提供商名称]</ProviderName>
+  <ProviderName>Esquel\IT</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="outlook" />
-  <Description DefaultValue="outlook"/>
+  <DisplayName DefaultValue="FabricFinder" />
+  <Description DefaultValue="Fabric Finder Is based on office 365 plug-in technology developed by Esquel LPD"/>
+  <IconUrl DefaultValue="~remoteAppUrl/Images/logol-s.png" />
+  <HighResolutionIconUrl DefaultValue="~remoteAppUrl/Images/logo.png" />
+  <SupportUrl DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html" />
   <Hosts>
     <Host Name="Mailbox" />
   </Hosts>
@@ -21,11 +24,25 @@
         <SourceLocation DefaultValue="~remoteAppUrl/AppRead/Home/Home.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
+      <TabletSettings>
+        <SourceLocation DefaultValue="~remoteAppUrl/AppRead/Home/Home.html" />
+        <RequestedHeight>250</RequestedHeight>
+      </TabletSettings>
+      <PhoneSettings>
+        <SourceLocation DefaultValue="~remoteAppUrl/AppRead/Home/Home.html" />
+      </PhoneSettings>
     </Form>
     <Form xsi:type="ItemEdit">
       <DesktopSettings>
         <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html"/>
       </DesktopSettings>
+      <!--<TabletSettings>
+        <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html" />
+        <RequestedHeight>250</RequestedHeight>
+      </TabletSettings>
+      <PhoneSettings>
+        <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html" />
+      </PhoneSettings>-->
     </Form>
   </FormSettings>
   <Permissions>ReadWriteItem</Permissions>
