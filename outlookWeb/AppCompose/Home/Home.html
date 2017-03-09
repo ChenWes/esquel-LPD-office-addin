@@ -94,69 +94,69 @@
                 </div>
             </div>
 
-        <md-content id="content-scroller" class="md-padding">
-            <div>
-                <div angular-grid="vm.shots" ag-grid-width="135" ag-gutter-size="5" ag-id="shots">
-                    <md-card ng-repeat="shot in vm.shots track by $index">
-                        <img ng-src="{{::shot.thumbnail_url}}" class="md-card-image" alt="Washed Out" />
-                        <md-card-title>
-                            <md-card-title-text>
-                                <h3>{{::shot.code}}</h3>
-                            </md-card-title-text>
-                        </md-card-title>
-                        <md-card-content>
-                            <p>
-                                <div class="description">{{shot.desc}}</div>
-                                <div class="description">{{shot.fabrication}}</div>
-                                <div class="description">{{shot.dye_method}}</div>
-                            </p>
-                        </md-card-content>
-                        <md-card-actions layout="column" layout-align="start">
-                            <md-button ng-click="vm.doCopyContent($index)">Attach to Email</md-button>
-                        </md-card-actions>
-                        <!-- Contents for attached. -->
-                        <div class="hide" ng-attr-id="{{'dv_' + $index}}">
-                            <p>
-                                <table>
-                                    <tr>
-                                        <td rowspan="2">
-                                            <img ng-src="{{::shot.thumbnail_url}}" height="128" width="128" />
-                                        </td>
-                                        <td style="padding:5px" valign="top">
-                                            <h3>{{::shot.code}}</h3>
-                                            <span ng-bind-html="::shot.desc | unsafe"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:5px" valign="top">
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.sub_category | unsafe"></div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.status | unsafe"></div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.category | unsafe"></div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.fabrication | unsafe"></div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.dye_method | unsafe"></div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.finishing | unsafe"></div>
-                                            <div style="{{attrCSS}}">Fabric Width: {{shot.fabric_width}}</div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.content | unsafe"></div>
-                                            <div style="{{attrCSS}}">Yarn Count Wrap:{{shot.yarn_count_wrap}} Weft:{{shot.yarn_count_weft}}</div>
-                                            <div style="{{attrCSS}}">Density Wrap:{{shot.density_wrap}} Weft:{{shot.density_weft}}</div>
-                                            <div style="{{attrCSS}}" ng-bind-html="::shot.handfeel | unsafe"></div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </p>
-                        </div>
-                    </md-card>
+            <md-content id="content-scroller" class="md-padding">
+                <div>
+                    <div angular-grid="vm.shots" ag-grid-width="135" ag-gutter-size="5" ag-id="shots">
+                        <md-card ng-repeat="shot in vm.shots track by $index">
+                            <img ng-src="{{::shot.thumbnail_url}}" class="md-card-image" alt="Washed Out" />
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <h3>{{::shot.code}}</h3>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>
+                                    <div class="description">{{shot.desc}}</div>
+                                    <div class="description">{{shot.fabrication}}</div>
+                                    <div class="description">{{shot.dye_method}}</div>
+                                </p>
+                            </md-card-content>
+                            <md-card-actions layout="column" layout-align="start">
+                                <md-button ng-click="vm.doCopyContent($index)">Attach to Email</md-button>
+                            </md-card-actions>
+                            <!-- Contents for attached. -->
+                            <div class="hide" ng-attr-id="{{'dv_' + $index}}">
+                                <p>
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2">
+                                                <img ng-src="{{::shot.thumbnail_url}}" height="128" width="128" />
+                                            </td>
+                                            <td style="padding:5px" valign="top">
+                                                <h3>{{::shot.code}}</h3>
+                                                <span ng-bind-html="::shot.desc | unsafe"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:5px" valign="top">
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.sub_category | unsafe"></div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.status | unsafe"></div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.category | unsafe"></div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.fabrication | unsafe"></div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.dye_method | unsafe"></div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.finishing | unsafe"></div>
+                                                <div style="{{attrCSS}}">Fabric Width: {{shot.fabric_width}}</div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.content | unsafe"></div>
+                                                <div style="{{attrCSS}}">Yarn Count Wrap:{{shot.yarn_count_wrap}} Weft:{{shot.yarn_count_weft}}</div>
+                                                <div style="{{attrCSS}}">Density Wrap:{{shot.density_wrap}} Weft:{{shot.density_weft}}</div>
+                                                <div style="{{attrCSS}}" ng-bind-html="::shot.handfeel | unsafe"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </p>
+                            </div>
+                        </md-card>
+                    </div>
+                </div>
+            </md-content>
+
+            <div id="content-footer">
+                <div class="padding">
+                    <a target="_blank" href="https://github.com/Esquel">powered by - Esquel LPD Project</a>
                 </div>
             </div>
-        </md-content>
 
-        <div id="content-footer">
-            <div class="padding">
-                <a target="_blank" href="https://github.com/Esquel">powered by - Esquel LPD Project</a>
-</div>
         </div>
-
-    </div>
 
 </body>
 
