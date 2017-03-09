@@ -271,7 +271,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         yarnWrap: ''
     }
 
-    console.log($scope);
+    
 
     /* button search function */
     vm.doSearch = function () {
@@ -284,6 +284,8 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         //}
         vm.loadMoreShots();
         $(".angular-grid-item").css("position", "relative");
+
+        console.log(vm);
     }
 
     /* copy content to mail */
@@ -442,6 +444,8 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
                 vm.shots = shotsTmp;
                 if (!vm.shots[0]) {
                     showError('No Record mathced.');
+                } else {
+                    showInfo('we found ' + vm.shots.length + ' fabric.')
                 }
             } else {
                 if (typeof aftCnv.ESBWrapperOutput.ResponseObject.ResponseData.Error.errorMsg == String) {
@@ -466,6 +470,14 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         $mdToast.show(
             $mdToast.simple()
                 .textContent(msg)
+                .hideDelay(5000)
+        );
+    }
+
+    showInfo = function (info) {
+        $mdToast.show(
+            $mdToast.simple()
+                .textContent(info)
                 .hideDelay(5000)
         );
     }
