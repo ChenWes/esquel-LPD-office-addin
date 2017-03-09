@@ -1,0 +1,1 @@
+# esquel-LPD-office-addin
