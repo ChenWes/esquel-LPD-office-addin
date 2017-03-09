@@ -36,13 +36,13 @@
       <DesktopSettings>
         <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html"/>
       </DesktopSettings>
-      <!--<TabletSettings>
+      <TabletSettings>
         <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html" />
         <RequestedHeight>250</RequestedHeight>
       </TabletSettings>
       <PhoneSettings>
         <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html" />
-      </PhoneSettings>-->
+      </PhoneSettings>
     </Form>
   </FormSettings>
   <Permissions>ReadWriteItem</Permissions>
