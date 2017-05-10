@@ -257,35 +257,25 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
     vm.pagesize = 20;
     vm.searchYear = 2016;
 
-    vm.shots = [];
+    vm.styles = [];
     vm.loadingMore = false;
     //vm.selectedID = 123456;
 
     //search condition
     $scope.SearchInfo = {
-        Year: "2016",
-        fabricID: '',
-        dm: '',
-        comboName: '',
-        yarnWeft: '',
-        yarnWrap: ''
+        styleID: '15CNLI001CL'
     }
 
-    
+
 
     /* button search function */
     vm.doSearch = function () {
         vm.page = 0;
-        vm.shots = [];
+        vm.styles = [];
         vm.loadingMore = false;
-        //vm.searchYear = $scope.SearchInfo.Year;
-        //if (vm.searchYear == "") {
-        //    vm.searchYear = "2016";
-        //}
+        
         vm.loadMoreShots();
         $(".angular-grid-item").css("position", "relative");
-
-        console.log(vm);
     }
 
     /* copy content to mail */
@@ -293,14 +283,6 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
 
         //var item = vm.shots[dvId];
         var ct = $("#dv_" + dvId);
-
-        //var sitem = vm.shots[dvId];
-        ////'http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png'
-        //urltoBase64(sitem.thumbnail_url, function (base64) {
-        //    console.log('encoded : ' + base64);
-        //    var img = ct.find('img');
-        //    img.attr('src', base64).end();
-        //});
 
         var item = Office.cast.item.toItemCompose(Office.context.mailbox.item);
 
@@ -352,108 +334,58 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         vm.loadingMore = true;
 
         var promise;
-        var wsUrl = 'https://dev-esb.esquel.com:6114/ESB/RequestReply';
+        var wsUrl = 'http://getazdevnt002.chinacloudapp.cn/sprintwes/api/v1/styleproduct/20/1';
         var soapRequest = '';
 
-        if ($scope.SearchInfo.fabricID != '') {
-            soapRequest = '<nam:ArrayOfSelectionFilter xmlns:nam="http://www.esquel.com/Product/namespace/">'
-                + '<nam:SelectionFilter>'
-                + '<nam:AttributeName>ITEM_NUMBER</nam:AttributeName>'
-                + '<nam:FilterType>LEAF</nam:FilterType>'
-                + '<nam:FilterValue>' + $scope.SearchInfo.fabricID + '</nam:FilterValue>'
-                + '<nam:SearchOperator>EQ</nam:SearchOperator>'
-                + '</nam:SelectionFilter>'
-                + '<nam:pageIndex>' + vm.page + '</nam:pageIndex>'
-                + '<nam:pageSize>' + vm.pagesize + '</nam:pageSize>'
-                + '</nam:ArrayOfSelectionFilter>';
-
-        } else if ($scope.SearchInfo.comboName != '' || $scope.SearchInfo.yarnWeft != '' || $scope.SearchInfo.yarnWrap != '') {
-            //search by Dye_method.
-            soapRequest = '<nam:ArrayOfSelectionFilter xmlns:nam="http://www.esquel.com/Product/namespace/">'
-                + '<nam:SelectionFilter>'
-                //+ '<nam:AttributeName xsi:nil="true"/>'
-                + '<nam:FilterType>AND</nam:FilterType>'
-                //+ '<nam:FilterValue xsi:nil="true"/>'
-                + '<nam:Filters>';
-            if ($scope.SearchInfo.comboName != '') {
-                soapRequest = soapRequest
-                    + '<nam:SelectionFilter>'
-                    + '<nam:AttributeName>PartComboName</nam:AttributeName>'
-                    + '<nam:FilterType>LEAF</nam:FilterType>'
-                    + '<nam:FilterValue>' + $scope.SearchInfo.comboName + '</nam:FilterValue>'
-                    //+ '<nam:Filters xsi:nil="true"/>'
-                    + '<nam:SearchOperator>EQ</nam:SearchOperator>'
-                    + '</nam:SelectionFilter>';
-            }
-
-            if ($scope.SearchInfo.yarnWeft != '') {
-                soapRequest = soapRequest
-                    + '<nam:SelectionFilter>'
-                    + '<nam:AttributeName>cn_yarn_count2</nam:AttributeName>'
-                    + '<nam:FilterType>LEAF</nam:FilterType>'
-                    + '<nam:FilterValue>' + $scope.SearchInfo.yarnWeft + '</nam:FilterValue>'
-                    //+ '<Filters xsi:nil="true"/>'
-                    + '<nam:SearchOperator>EQ</nam:SearchOperator>'
-                    + '</nam:SelectionFilter>';
-            }
-            if ($scope.SearchInfo.yarnWrap != '') {
-                soapRequest = soapRequest
-                    + '<nam:SelectionFilter>'
-                    + '<nam:AttributeName>cn_yarn_count</nam:AttributeName>'
-                    + '<nam:FilterType>LEAF</nam:FilterType>'
-                    + '<nam:FilterValue>' + $scope.SearchInfo.yarnWrap + '</nam:FilterValue>'
-                    //+ '<Filters xsi:nil="true"/>'
-                    + '<nam:SearchOperator>EQ</nam:SearchOperator>'
-                    + '</nam:SelectionFilter>';
-            }
-            soapRequest = soapRequest + '<nam:pageIndex>0</nam:pageIndex> \
-                                            <nam:pageSize>0</nam:pageSize> \
-                                        </nam:Filters></nam:SelectionFilter>'
-                + '<nam:pageIndex>' + vm.page + '</nam:pageIndex>'
-                + '<nam:pageSize>' + vm.pagesize + '</nam:pageSize>'
-                + '</nam:ArrayOfSelectionFilter>';
+        if ($scope.SearchInfo.styleID != '') {
+            soapRequest = {
+                "filterType": "LEAF",
+                "filters": [{}],
+                "attributeName": "item_number",
+                "searchOperator": "eq",
+                "filterValue": $scope.SearchInfo.styleID
+            };
         } else {
             //search all result.
-            soapRequest = '<nam:ArrayOfSelectionFilter xmlns:nam="http://www.esquel.com/Product/namespace/">'
-                + '<nam:pageIndex>' + vm.page + '</nam:pageIndex>'
-                + '<nam:pageSize>' + vm.pagesize + '</nam:pageSize>'
-                + '</nam:ArrayOfSelectionFilter>';
+            soapRequest = {};
         }
 
         var req = {
             method: 'POST',
             url: wsUrl,
-            data: soapRequest,
+            data: JSON.stringify(soapRequest),
             headers: {
-                "Jms-Destination": "cn.grm.instantNoodle.getFabricPartList",
-                "Jms-Timeout": 100
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
-            cache: false
+            cache: false 
         }
 
         var doneFun = function (resp) {
-            //$("#user").text("Status is definitely:" + status);
             var shotsTmp = angular.copy(vm.shots);
 
-            //shotsTmp = shotsTmp.concat($(data).find("Woven"));
-            var x2js = new X2JS();
-            var aftCnv = x2js.xml_str2json(resp.data);
-            if (aftCnv.ESBWrapperOutput.ResponseObject.ResponseData.Data && aftCnv.ESBWrapperOutput.ResponseObject.ResponseData.Data.FabricItems) {
-                promise = aftCnv.ESBWrapperOutput.ResponseObject.ResponseData.Data.FabricItems.Woven;
-                shotsTmp = shotsTmp.concat(promise);
-                vm.shots = shotsTmp;
-                if (!vm.shots[0]) {
-                    showError('No Record mathced.');
+            if (resp.data) {
+                var responsedata = resp.data;
+
+                if (responsedata.resultType === "SUCCESS") {
+                    if (responsedata.results) {
+                        shotsTmp = responsedata.results[0].data;                        
+
+                        vm.styles = shotsTmp;
+                        if (!vm.styles[0]) {
+                            showError('No Style Mathced.');
+                        } else {
+                            showInfo('We Found ' + vm.styles.length + ' Style.')
+                        }
+                    }
+                    else {
+                        showError('WebAPI Return Error:' + tempdata.resultMsg);
+                    }
                 } else {
-                    showInfo('we found ' + vm.shots.length + ' fabric.')
+                    showError('WebAPI Return Error:' + tempdata.resultMsg);
                 }
             } else {
-                if (typeof aftCnv.ESBWrapperOutput.ResponseObject.ResponseData.Error.errorMsg == String) {
-                    msg = 'Web service return error: ' + aftCnv.ESBWrapperOutput.ResponseObject.ResponseData.Error.errorMsg;
-                } else {
-                    msg = 'Web service return error.';
-                }
-                showError(msg);
+                showError('WebAPI Return Data Is Null Or Empty.');
             }
 
             vm.loadingMore = false;
@@ -487,17 +419,17 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
 
 ngapp.filter('unsafe', function ($sce) { return $sce.trustAsHtml; });
 
-function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'photo.json', true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
-}
+// function loadJSON(callback) {
+//     var xobj = new XMLHttpRequest();
+//     xobj.overrideMimeType("application/json");
+//     xobj.open('GET', 'photo.json', true); // Replace 'my_data' with the path to your file
+//     xobj.onreadystatechange = function () {
+//         if (xobj.readyState == 4 && xobj.status == "200") {
+//             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+//             callback(xobj.responseText);
+//         }
+//     };
+//     xobj.send(null);
+// }
 
 
