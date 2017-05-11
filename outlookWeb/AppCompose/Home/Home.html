@@ -37,6 +37,8 @@
 
     <script src='../../Scripts/angulargrid.js'></script>
     <script src="index.js"></script>
+    <script src="../../Scripts/adal.js"></script>
+    <script src="../../Scripts/adal-angular.js"></script>
     <script src="../../Scripts/xml2json.js" type="text/javascript" charset="UTF-8"></script>
 </head>
 
@@ -64,6 +66,8 @@
 
                 <md-content id="content-scroller" layout="row">
                     <div>
+                        <a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a>
+                        <a class="btn btn-link" ng-hide=" userInfo.isAuthenticated" ng-click="login()">Login</a>
                         <p>
                             <md-input-container>
                                 <label>Yarn Count Weft:</label>

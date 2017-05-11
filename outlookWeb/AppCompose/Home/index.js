@@ -1,7 +1,28 @@
-﻿var ngapp = angular.module('ngapp', ['ngMaterial', 'angularGrid']);
+﻿var ngapp = angular.module('ngapp', ['ngMaterial', 'angularGrid', 'AdalAngular'])
+    .config(['$httpProvider', 'adalAuthenticationServiceProvider', function ($httpProvider, adalProvider) {
+        adalProvider.init(
+            {
+                instance: 'https://login.microsoftonline.com/',
+                tenant: 'esquel.onmicrosoft.com',
+                clientId: '741a869c-ce4c-46c0-8794-60a6391293ca',
+                extraQueryParameter: 'nux=1',
+                cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
+            },
+            $httpProvider
+        );
+    }]);
 
-ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
+
+ngapp.controller('MainCtrl', ['$scope', '$mdToast', '$http', 'adalAuthenticationService', '$q', function ($scope, $mdToast, $http, adalService, $q) {
     var vm = this;
+
+    $scope.login = function () {
+        adalService.login();
+    };
+    $scope.logout = function () {
+        adalService.logOut();
+    };
+
 
     $scope.yarns = [
         { id: '', lable: 'ALL' },
@@ -271,7 +292,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         yarnWrap: ''
     }
 
-    
+
 
     /* button search function */
     vm.doSearch = function () {
@@ -285,7 +306,31 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         vm.loadMoreShots();
         $(".angular-grid-item").css("position", "relative");
 
-        console.log(vm);
+        // var gettoken;
+
+        var tokenStored = adalService.acquireToken('https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b');
+        console.log('---------------------------')
+        console.log(tokenStored);
+        console.log('---------------------------')
+
+        // adalService.acquireToken('https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b', function (err, token) {
+        //     if (err) {
+        //         console.log('---------------------------')
+        //         console.log(err);
+        //         gettoken = null;
+        //         console.log('---------------------------')
+        //     }
+        //     console.log('---------------------------')
+        //     gettoken = token;
+        //     console.log(token);
+        //     console.log('---------------------------')
+        // });
+
+
+        // console.log(gettoken);
+
+
+        // console.log(vm);
     }
 
     /* copy content to mail */
@@ -483,7 +528,8 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
     }
     //vm.loadMoreShots();
 
-});
+}]);
+
 
 ngapp.filter('unsafe', function ($sce) { return $sce.trustAsHtml; });
 

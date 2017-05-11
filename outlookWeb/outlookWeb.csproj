@@ -68,6 +68,8 @@
   <ItemGroup>
     <Content Include="AppCompose\App.css" />
     <Content Include="AppCompose\App.js" />
+    <Content Include="Scripts\adal-angular.js" />
+    <Content Include="Scripts\adal.js" />
     <Content Include="AppCompose\Home\Home.css" />
     <Content Include="AppCompose\Home\Home.html" />
     <Content Include="AppCompose\Home\Home.js" />
