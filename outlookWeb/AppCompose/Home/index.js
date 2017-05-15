@@ -334,7 +334,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         vm.loadingMore = true;
 
         var promise;
-        var wsUrl = 'http://getazdevnt002.chinacloudapp.cn/sprintwes/api/v1/styleproduct/20/1';
+        var wsUrl = 'https://getazdevnt002.chinacloudapp.cn:573/sprintwes/api/v1/styleproduct/20/1';
         var soapRequest = '';
 
         if ($scope.SearchInfo.styleID != '') {

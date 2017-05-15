@@ -40,10 +40,16 @@
 </head>
 
 <body>
+
+    <div class="header">
+        <div class="padding">
+            <h1>Esquel Style Library</h1>
+        </div>
+    </div>
     <div id="content-main" ng-app="ngapp" ng-controller="MainCtrl as vm" ng-cloak="">
         <div class="padding">
             <div layout="column">
-                <md-toolbar class="md-whiteframe-z2">
+                <!--<md-toolbar class="md-whiteframe-z2">
                     <div class="md-toolbar-tools">
                         <button class="md-button md-icon-button">
                             <md-icon>
@@ -57,7 +63,7 @@
                             <span>Esquel Style Library</span>
                         </h2>
                     </div>
-                </md-toolbar>
+                </md-toolbar>-->
 
                 <md-content id="content-scroller" layout="row">
                     <div>
@@ -106,7 +112,8 @@
                                             </td>
                                             <td style="padding:5px" valign="top">
                                                 <h3>{{::style.productStyles.styleID}}({{::style.productStyles.styleVersion +
-                                                    style.productStyles.styleVersionSerialNo}})</h3>
+                                                    style.productStyles.styleVersionSerialNo}})
+                                                </h3>
                                                 <span ng-bind-html="::style.linePlanProducts.longDescriptions.join(' ') | unsafe"></span>
                                             </td>
                                         </tr>
@@ -143,4 +150,5 @@
             </div>
         </div>
 </body>
+
 </html>
