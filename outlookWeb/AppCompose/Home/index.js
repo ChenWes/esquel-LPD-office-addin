@@ -252,28 +252,25 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
 
     $scope.attrCSS = 'float: left; padding: 5px; border: 1px solid #EEEEEE; background-color: #EEEEEE;margin:5px';
 
-    //$scope.defaults.gridNo = 1;
+    //$scope.defaults.gridNo = 1;  
     vm.page = 1;
     vm.pagesize = 20;
-    vm.searchYear = 2016;
-
     vm.styles = [];
+
+    //just flag , prevent mutil call
     vm.loadingMore = false;
-    //vm.selectedID = 123456;
 
     //search condition
     $scope.SearchInfo = {
-        styleID: '15CNLI001CL'
+        styleID: ''
     }
-
 
 
     /* button search function */
     vm.doSearch = function () {
-        vm.page = 0;
         vm.styles = [];
         vm.loadingMore = false;
-        
+
         vm.loadMoreShots();
         $(".angular-grid-item").css("position", "relative");
     }
@@ -325,16 +322,16 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
             });
     }
 
-    /* query ESB function */
+    /* call WebAPI function */
     vm.loadMoreShots = function () {
 
         if (vm.loadingMore) return;
-        vm.page++;
+
         // var deferred = $q.defer();
         vm.loadingMore = true;
 
         var promise;
-        var wsUrl = 'https://getazdevnt002.chinacloudapp.cn:573/sprintwes/api/v1/styleproduct/20/1';
+        var wsUrl = 'https://dev-esb.esquel.com:6114/sprintwes/api/v1/styleproduct/' + vm.pagesize + '/' + vm.page;
         var soapRequest = '';
 
         if ($scope.SearchInfo.styleID != '') {
@@ -345,9 +342,11 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
                 "searchOperator": "eq",
                 "filterValue": $scope.SearchInfo.styleID
             };
+
+            vm.page = 1;
         } else {
             //search all result.
-            soapRequest = {};
+            soapRequest = {};            
         }
 
         var req = {
@@ -358,7 +357,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            cache: false 
+            cache: false
         }
 
         var doneFun = function (resp) {
@@ -369,13 +368,15 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
 
                 if (responsedata.resultType === "SUCCESS") {
                     if (responsedata.results) {
-                        shotsTmp = responsedata.results[0].data;                        
+                        shotsTmp = responsedata.results[0].data;
 
                         vm.styles = shotsTmp;
                         if (!vm.styles[0]) {
                             showError('No Style Mathced.');
                         } else {
-                            showInfo('We Found ' + vm.styles.length + ' Style.')
+                            showInfo('We Found Page [' + vm.page + '] ' + vm.styles.length + ' Style.')
+
+                            vm.page++;
                         }
                     }
                     else {
@@ -393,6 +394,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
 
         var failedFun = function () {
             vm.loadingMore = false;
+            showError('Call WebAPI Have Error.');
         };
 
         return $http(req).then(doneFun, failedFun);
@@ -413,23 +415,8 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
                 .hideDelay(5000)
         );
     }
-    //vm.loadMoreShots();
-
 });
 
+
 ngapp.filter('unsafe', function ($sce) { return $sce.trustAsHtml; });
-
-// function loadJSON(callback) {
-//     var xobj = new XMLHttpRequest();
-//     xobj.overrideMimeType("application/json");
-//     xobj.open('GET', 'photo.json', true); // Replace 'my_data' with the path to your file
-//     xobj.onreadystatechange = function () {
-//         if (xobj.readyState == 4 && xobj.status == "200") {
-//             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-//             callback(xobj.responseText);
-//         }
-//     };
-//     xobj.send(null);
-// }
-
 

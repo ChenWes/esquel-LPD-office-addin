@@ -50,25 +50,28 @@
                 -->
                 <div style="padding-left: 37px;">
                     <md-input-container>
-                        <label>Year:</label>
-                        <input ng-model="SearchInfo.Year">
+                        <label>Style ID:</label>
+                        <input ng-model="SearchInfo.StyleID">
                     </md-input-container>
                     <md-button class="md-raised md-primary" ng-click="vm.doSearch()" flex-gt-sm>Search</md-button>
                 </div>
 
                 <md-content id="content-scroller">
                     <div>
-                        <div class="cards-wrap" angular-grid="vm.shots" ag-grid-width="150" ag-performant-scroll="true" ag-gutter-size="12" ag-id="shots"
+                        <div class="cards-wrap" angular-grid="vm.styles" ag-grid-width="150" ag-performant-scroll="true" ag-gutter-size="12" ag-id="styles"
                             ag-infinite-scroll="vm.loadMoreShots()">
-                            <div class="card" ng-repeat="shot in vm.shots track by $index">
-                                <div class="img" style="background-image: url({{::shot.thumbnail_url}});"></div>
+                            <div class="card" ng-repeat="style in vm.styles track by $index">
+                                <div class="img" style="background-image: url({{::style.productStyles.imageURL}});"></div>
 
                                 <div class="inside">
-                                    <h3>{{::shot.code}}</h3>
-                                    <div class="description" ng-bind-html="::shot.status | unsafe"></div>
-                                    <div class="description" ng-bind-html="::shot.desc | unsafe"></div>
-                                    <div class="description" ng-bind-html="::shot.fabrication | unsafe"></div>
-                                    <div class="description" ng-bind-html="::shot.dye_method | unsafe"></div>
+                                    <h3>{{::style.productStyles.styleID}}</h3>
+                                    <div class="description">{{style.productStyles.styleVersion + style.productStyles.styleVersionSerialNo}}</div>
+                                    <div class="description">{{style.productStyles.collectionName?style.productStyles.collectionName+' Collection':''}} </div>
+                                    <div class="description">{{style.productStyles.collarName}}</div>
+                                    <div class="description">{{style.productStyles.placketName}}</div>
+                                    <div class="description">{{style.productStyles.cuffName}}</div>
+                                    <div class="description">{{style.productStyles.fitName}}</div>
+                                    <div class="description">{{style.productStyles.sleeveName?style.productStyles.sleeveName+' Sleeve':''}} </div>
                                 </div>
                             </div>
                         </div>

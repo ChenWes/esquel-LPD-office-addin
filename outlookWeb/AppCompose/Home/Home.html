@@ -91,12 +91,12 @@
                             <md-card-content>
                                 <p>
                                     <div class="description">{{style.productStyles.styleVersion + style.productStyles.styleVersionSerialNo}}</div>
-                                    <div class="description">{{style.productStyles.collectionName}} Collection</div>
+                                    <div class="description">{{style.productStyles.collectionName?style.productStyles.collectionName+' Collection':''}} </div>
                                     <div class="description">{{style.productStyles.collarName}}</div>
                                     <div class="description">{{style.productStyles.placketName}}</div>
                                     <div class="description">{{style.productStyles.cuffName}}</div>
                                     <div class="description">{{style.productStyles.fitName}}</div>
-                                    <div class="description">{{style.productStyles.sleeveName}} Sleeve</div>
+                                    <div class="description">{{style.productStyles.sleeveName?style.productStyles.sleeveName+' Sleeve':''}} </div>
                                 </p>
                             </md-card-content>
                             <md-card-actions layout="column" layout-align="start">
@@ -132,7 +132,7 @@
                                                 <div style="{{attrCSS}}" ng-bind-html="::style.productStyles.pocketName | unsafe"></div>
                                                 <div style="{{attrCSS}}" ng-bind-html="::style.productStyles.collectionName | unsafe"></div>
                                                 <div style="{{attrCSS}}" ng-bind-html="::style.productStyles.sleeveName | unsafe"></div>
-                                                <div style="{{attrCSS}}">remark: {{style.productStyles}}</div>
+                                                <div style="{{attrCSS}}">remark: {{style.productStyles.remark}}</div>
                                             </td>
                                         </tr>
                                     </table>
