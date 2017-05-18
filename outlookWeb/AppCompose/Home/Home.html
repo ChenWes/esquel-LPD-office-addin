@@ -91,7 +91,8 @@
                             <md-card-content>
                                 <p>
                                     <div class="description">{{style.productStyles.styleVersion + style.productStyles.styleVersionSerialNo}}</div>
-                                    <div class="description">{{style.productStyles.collectionName?style.productStyles.collectionName+' Collection':''}} </div>
+                                    <div class="description">{{style.productStyles.collectionName?style.productStyles.collectionName+' Collection':''}}
+                                    </div>
                                     <div class="description">{{style.productStyles.collarName}}</div>
                                     <div class="description">{{style.productStyles.placketName}}</div>
                                     <div class="description">{{style.productStyles.cuffName}}</div>
@@ -114,7 +115,7 @@
                                                 <h3>{{::style.productStyles.styleID}}({{::style.productStyles.styleVersion +
                                                     style.productStyles.styleVersionSerialNo}})
                                                 </h3>
-                                                <span ng-bind-html="::style.linePlanProducts.longDescriptions.join(' ') | unsafe"></span>
+                                                <span ng-bind-html="::style.productStyles.longDescriptions.join(' ') | unsafe"></span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -132,7 +133,7 @@
                                                 <div style="{{attrCSS}}" ng-bind-html="::style.productStyles.pocketName | unsafe"></div>
                                                 <div style="{{attrCSS}}" ng-bind-html="::style.productStyles.collectionName | unsafe"></div>
                                                 <div style="{{attrCSS}}" ng-bind-html="::style.productStyles.sleeveName | unsafe"></div>
-                                                <div style="{{attrCSS}}">remark: {{style.productStyles.remark}}</div>
+                                                <div style="{{attrCSS}}">{{style.productStyles.remark?'remark:'+style.productStyles.remark:''}}</div>
                                             </td>
                                         </tr>
                                     </table>

@@ -282,7 +282,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
         var ct = $("#dv_" + dvId);
 
         var item = Office.cast.item.toItemCompose(Office.context.mailbox.item);
-
+        
         item.body.getTypeAsync(
             function (result) {
                 if (result.status != Office.AsyncResultStatus.Failed) {
@@ -346,7 +346,7 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
             vm.page = 1;
         } else {
             //search all result.
-            soapRequest = {};            
+            soapRequest = {};
         }
 
         var req = {
@@ -369,14 +369,18 @@ ngapp.controller('MainCtrl', function ($scope, $mdToast, $http, $q) {
                 if (responsedata.resultType === "SUCCESS") {
                     if (responsedata.results) {
                         shotsTmp = responsedata.results[0].data;
+                        var totalPage = responsedata.results[0].totalPage;
 
                         vm.styles = shotsTmp;
                         if (!vm.styles[0]) {
                             showError('No Style Mathced.');
                         } else {
-                            showInfo('We Found Page [' + vm.page + '] ' + vm.styles.length + ' Style.')
+                            showInfo('We Found Page [' + vm.page + '] ' + vm.styles.length + ' Style.');
 
-                            vm.page++;
+                            //check next page
+                            if (vm.page < totalPage) {
+                                vm.page++;
+                            }
                         }
                     }
                     else {
