@@ -1,12 +1,14 @@
 ﻿var ngapp = angular.module('ngapp', ['ngMaterial', 'angularGrid', 'AdalAngular'])
     .config(['$httpProvider', 'adalAuthenticationServiceProvider', function ($httpProvider, adalProvider) {
+
+
         adalProvider.init(
             {
                 instance: 'https://login.microsoftonline.com/',
                 tenant: '29abf16e-95a2-4d13-8d51-6db1b775d45b',
                 clientId: '741a869c-ce4c-46c0-8794-60a6391293ca',
                 extraQueryParameter: 'nux=1',
-                cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
+                cacheLocation: 'localStorage' // enable this for IE, as sessionStorage does not work for localhost.
             },
             $httpProvider
         );
@@ -306,52 +308,13 @@ ngapp.controller('MainCtrl', ['$scope', '$mdToast', '$http', 'adalAuthentication
         vm.loadMoreShots();
         $(".angular-grid-item").css("position", "relative");
 
-        // var gettoken;
-        // var resource = adalService.getResourceForEndpoint('getazdevnt002.chinacloudapp.cn/');
-        // console.log('*********************---------------------------');
-        // console.log(resource);
-        // console.log('*********************---------------------------');
-        resource = 'https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b/';
-        // var newtoken = adalService.getCachedToken(resource);
-        var newtoken = adalService.acquireToken(resource, function (error, token) {
-            if (error) {
-                console.log('---------------------------*********************');
-                console.log(error);
-                console.log('---------------------------*********************');
-            }
-            if (error_description) {
-                console.log('---------------------------*********************');
-                console.log(error_description);
-                console.log('---------------------------*********************');
-            }
 
-            console.log('---------------------------*********************');
+        var resource = adalService.getResourceForEndpoint('https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b');
+        // var tokenStored = adalService.getCachedToken(resource);
+        adalService.acquireToken('https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b').then(function (token) {
             console.log(token);
-            console.log('---------------------------*********************');
+            showError(token);
         });
-
-        console.log('---------------------------*********************');
-        console.log(newtoken);
-        console.log('---------------------------*********************');
-
-        // var tokenStored = adalService.acquireToken('https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b');
-
-        // adalService.acquireToken('https://esquel.onmicrosoft.com/705cadd7-d8b2-44f7-9c28-3841c112f04b', function (err, token) {
-        //     if (err) {
-        //         console.log('---------------------------')
-        //         console.log(err);
-        //         gettoken = null;
-        //         console.log('---------------------------')
-        //     }
-        //     console.log('---------------------------')
-        //     gettoken = token;
-        //     console.log(token);
-        //     console.log('---------------------------')
-        // });
-
-
-        // console.log(gettoken);
-
 
         // console.log(vm);
     }
