@@ -11,7 +11,7 @@
             $httpProvider
         );
 
-    }]);;
+    }]);
 
 ngapp.controller('MainCtrl', ['$scope', '$mdToast', '$http', 'adalAuthenticationService', '$q', function ($scope, $mdToast, $http, adalService, $q) {
     var vm = this;
@@ -142,8 +142,8 @@ ngapp.controller('MainCtrl', ['$scope', '$mdToast', '$http', 'adalAuthentication
             soapRequest = {};
         }
 
-        console.log('token------------');
-        console.log(token);
+        // console.log('token------------');
+        // console.log(token);
 
         var req = {
             method: 'POST',
@@ -172,7 +172,7 @@ ngapp.controller('MainCtrl', ['$scope', '$mdToast', '$http', 'adalAuthentication
                         if (!vm.styles[0]) {
                             showError('No Style Mathced.');
                         } else {
-                            showInfo('We Found Page [' + vm.page + '] ' + vm.styles.length + ' Style.' + token);
+                            showInfo('We Found Page [' + vm.page + '] ' + vm.styles.length + ' Style.');
 
                             //check next page
                             if (vm.page < totalPage) {

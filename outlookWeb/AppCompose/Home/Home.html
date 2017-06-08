@@ -35,6 +35,12 @@
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
     <script src='https://cdn.rawgit.com/sroze/ngInfiniteScroll/master/build/ng-infinite-scroll.js'></script>
 
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.2.0/css/fabric.min.css"
+    />
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.2.0/css/fabric.components.min.css"
+    />
+    <script src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.2.0/js/fabric.min.js"></script>
+
     <script src='../../Scripts/angulargrid.js'></script>
     <script src="index.js"></script>
     <script src="../../Scripts/adal.js"></script>
@@ -68,8 +74,14 @@
                 </md-toolbar>-->
 
                 <md-content id="content-scroller" layout="row">
-                    <a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a>
-                    <a class="btn btn-link" ng-hide=" userInfo.isAuthenticated" ng-click="login()">Login</a>
+                    <button class="ms-Button" ng-show="userInfo.isAuthenticated" ng-click="logout()">
+                        <span class="ms-Button-label">Logout</span> 
+                    </button>
+                    <button class="ms-Button" ng-hide=" userInfo.isAuthenticated" ng-click="login()">
+                        <span class="ms-Button-label">Login</span> 
+                    </button>
+                </md-content>
+                <md-content id="content-scroller" layout="row">
                     <div>
                         <md-input-container>
                             <label>Style ID:</label>

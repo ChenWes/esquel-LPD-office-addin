@@ -24,6 +24,22 @@
     <link rel="stylesheet" href="../../Scripts/normalize.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.css'>
     <link rel="stylesheet" href="../../Scripts/style.css">
+
+
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+    <script src='https://cdn.rawgit.com/sroze/ngInfiniteScroll/master/build/ng-infinite-scroll.js'></script>
+
+
+    <script src='../../Scripts/angulargrid.js'></script>
+    <script src="index.js"></script>
+    <script src="../../Scripts/adal.js"></script>
+    <script src="../../Scripts/adal-angular.js"></script>
 </head>
 
 <body>
@@ -49,6 +65,12 @@
                 <div><label id="testlabel">Year:</label><input type="text" ng-model="SearchInfo.Year" /><button ng-click="vm.doSearch()">Search</button></div>
                 -->
                 <div style="padding-left: 37px;">
+                    <button class="ms-Button" ng-show="userInfo.isAuthenticated" ng-click="logout()">
+                        <span class="ms-Button-label">Logout</span> 
+                    </button>
+                    <button class="ms-Button" ng-hide=" userInfo.isAuthenticated" ng-click="login()">
+                        <span class="ms-Button-label">Login</span> 
+                    </button>
                     <md-input-container>
                         <label>Style ID:</label>
                         <input ng-model="SearchInfo.StyleID">
@@ -66,7 +88,8 @@
                                 <div class="inside">
                                     <h3>{{::style.productStyles.styleID}}</h3>
                                     <div class="description">{{style.productStyles.styleVersion + style.productStyles.styleVersionSerialNo}}</div>
-                                    <div class="description">{{style.productStyles.collectionName?style.productStyles.collectionName+' Collection':''}} </div>
+                                    <div class="description">{{style.productStyles.collectionName?style.productStyles.collectionName+' Collection':''}}
+                                        </div>
                                     <div class="description">{{style.productStyles.collarName}}</div>
                                     <div class="description">{{style.productStyles.placketName}}</div>
                                     <div class="description">{{style.productStyles.cuffName}}</div>
@@ -85,23 +108,13 @@
 
             </div>
 
-            <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
-            <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
-            <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
-            <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
-            <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.js'></script>
-            <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
-            <script src='https://cdn.rawgit.com/sroze/ngInfiniteScroll/master/build/ng-infinite-scroll.js'></script>
 
             <!--
             <script>
                 (function () { var a = document.createElement("script"); a.src = "https://rawgit.com/kentcdodds/ng-stats/master/dist/ng-stats.js"; a.onload = function () { window.showAngularStats({ position: 'topright' }) }; document.head.appendChild(a) })();
             </script>
             -->
-            <script src='../../Scripts/angulargrid.js'></script>
-            <script src="index.js"></script>
-            <script src="../../Scripts/xml2json.js" type="text/javascript" charset="UTF-8"></script>
+
         </div>
     </div>
     <div id="content-footer">
