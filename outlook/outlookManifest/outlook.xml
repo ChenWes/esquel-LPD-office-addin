@@ -7,9 +7,9 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="LPD-OfficeApp" />
   <Description DefaultValue="Esquel LPD Office App Is based on office 365 plug-in technology developed by Esquel LPD Project"/>
-  <IconUrl DefaultValue="~remoteAppUrl/Images/logo-s.png" />
-  <HighResolutionIconUrl DefaultValue="~remoteAppUrl/Images/logo.png" />
-  <SupportUrl DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html" />
+  <IconUrl DefaultValue="https://lpd-office-addin.azurewebsites.net/Images/logo-s.png" />
+  <HighResolutionIconUrl DefaultValue="https://lpd-office-addin.azurewebsites.net/Images/logo.png" />
+  <SupportUrl DefaultValue="https://lpd-office-addin.azurewebsites.net//AppCompose/Home/Home.html" />
   <Hosts>
     <Host Name="Mailbox" />
   </Hosts>
@@ -21,13 +21,13 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="~remoteAppUrl/AppRead/Home/Home.html"/>
+        <SourceLocation DefaultValue="https://lpd-office-addin.azurewebsites.net/AppRead/Home/Home.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
     <Form xsi:type="ItemEdit">
       <DesktopSettings>
-        <SourceLocation DefaultValue="~remoteAppUrl/AppCompose/Home/Home.html"/>
+        <SourceLocation DefaultValue="https://lpd-office-addin.azurewebsites.net/AppCompose/Home/Home.html"/>
       </DesktopSettings>
     </Form>
   </FormSettings>
