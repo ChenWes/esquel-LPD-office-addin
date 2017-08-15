@@ -84,6 +84,7 @@
     <Content Include="Images\Close.png" />
     <Content Include="Images\logo-s.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="outlook.xml" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
